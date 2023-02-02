@@ -9,8 +9,18 @@ const typeDefs = gql`
     nationality: String!
   }
 
+  type TimeList {
+    id: ID!
+    yearOfPublication: Int!
+    name: String!
+  }
+
   type Query {
     users: [User!]!
+    user(id: ID!): User!
+
+    allTime: [TimeList!]!
+    singleTime(name: String!): TimeList!
   }
 `;
 
