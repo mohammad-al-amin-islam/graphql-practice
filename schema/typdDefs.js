@@ -22,6 +22,23 @@ const typeDefs = gql`
     allTime: [TimeList!]!
     singleTime(name: String!): TimeList!
   }
+
+  input CreateUserInput {
+    name: String!
+    username: String!
+    age: Int!
+    nationality: String!
+  }
+  input CreateUpdate {
+    id: ID!
+    newUserName: String
+  }
+
+  type Mutation {
+    createUser(input: CreateUserInput!): User
+    updateUser(input: CreateUpdate!): User
+    deleteUser(id: ID!): User
+  }
 `;
 
 module.exports = { typeDefs };

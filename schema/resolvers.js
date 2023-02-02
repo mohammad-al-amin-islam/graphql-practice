@@ -20,6 +20,35 @@ const resolvers = {
       return res;
     },
   },
+  Mutation: {
+    createUser: (parent, arg) => {
+      const input = arg.input;
+      const last = UserList[UserList.length - 1].id;
+      input.id = last + 1;
+      UserList.push(input);
+      return input;
+    },
+
+    updateUser: (parent, arg) => {
+      const { id, newUserName } = arg.input;
+      let updateUsername;
+      UserList.forEach((user) => {
+        if (user.id === Number(id)) {
+          user.username = newUserName;
+          updateUsername = user;
+        }
+      });
+
+      return updateUsername;
+    },
+    deleteUser: (parent, arg) => {
+      const id = arg.id;
+      let updateUser;
+      const newlist = UserList.filter((user) => user.id !== Number(id));
+      updateUser = newlist;
+      return null;
+    },
+  },
 };
 
 module.exports = { resolvers };
